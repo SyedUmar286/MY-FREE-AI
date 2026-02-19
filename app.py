@@ -1,25 +1,25 @@
 import streamlit as st
+import random
 
-st.set_page_config(page_title="My Free AI", page_icon="🚀")
-st.title("🚀 My Own Super-Fast AI Maker")
+st.set_page_config(page_title="My VIP AI", page_icon="🔥")
+st.title("🔥 My VIP Fast AI Generator")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A cute cat astronaut")
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic robot playing cricket")
 
 if st.button("Generate Now"):
     if prompt:
-        with st.spinner("AI Magic dikha raha hai..."):
-            # Hum ek naya aur stable free server use kar rahe hain
-            # Is baar 'Pollinations' ke bajaye 'Unsplash' ya 'Cloudflare' ka alternative logic hai
-            image_url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}?width=1024&height=1024&nologo=true&seed={st.session_state.get('seed', 42)}"
+        with st.spinner("AI photo bana raha hai, thoda sabar..."):
+            # Is baar hum server aur seed badal kar try kar rahe hain
+            seed = random.randint(1, 100000)
+            # Alternative stable link
+            image_url = f"https://pollinations.ai/p/{prompt.replace(' ', '%20')}?width=1024&height=1024&seed={seed}&model=flux&nologo=true"
             
-            # Image ko display karne ka naya tareeqa
-            st.image(image_url, caption="Tumhara Result", use_container_width=True)
+            # Direct Image display
+            st.image(image_url, caption="Mubarak ho! Picture tayyar hai.", use_container_width=True)
             
-            # Save button asani ke liye
-            st.markdown(f'<a href="{image_url}" download="my_ai_image.png">📥 Image Save Karein</a>', unsafe_allow_html=True)
-            
-            st.success("Mubarak ho! Image ban gayi.")
+            # Agar image phir bhi na dikhe toh ye Link kaam karega
+            st.write("---")
+            st.write("📩 **Agar upar photo nazar nahi aa rahi, toh niche button dabao:**")
+            st.link_button("Photo Dekho (Open in New Tab)", image_url)
     else:
-        st.warning("Pehle kuch likho toh sahi!")
-
-st.info("Tip: Agar image load na ho, toh 'Generate' button dobara dabayein.")
+        st.warning("Kuch likho toh sahi!")
