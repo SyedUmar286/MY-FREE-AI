@@ -1,28 +1,21 @@
 import streamlit as st
 import random
 
-st.set_page_config(page_title="My Final AI", page_icon="⚡")
-st.title("⚡ My Real AI Image Maker")
+st.set_page_config(page_title="My Working AI", page_icon="⭐")
+st.title("⭐ My 100% Working Image Searcher")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A cool gaming logo")
+prompt = st.text_input("Kya dekhna hai?", placeholder="e.g. Blue sports car")
 
 if st.button("Banao!"):
     if prompt:
-        with st.spinner("AI Nayi Photo bana raha hai..."):
-            # Har baar naya number (seed) taake same pic na aaye
-            seed = random.randint(1, 999999)
+        with st.spinner("Dhoond raha hoon..."):
+            # Hum Google/Source ka imagery server use karenge jo kabhi block nahi hota
+            # Seed isliye taake har baar nayi image aaye
+            seed = random.randint(1, 1000)
+            image_url = f"https://source.unsplash.com/featured/?{prompt.replace(' ', ',')}&sig={seed}"
             
-            # Ye link sabse stable hai aur images change karta hai
-            image_url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}?width=1024&height=1024&seed={seed}&nologo=true"
-            
-            # Hum image ko container mein dalenge taake error na aaye
+            # Display image
             st.image(image_url, caption=f"Result for: {prompt}", use_container_width=True)
-            
-            # Agar image load na ho toh backup link
-            st.write("---")
-            st.write("📩 **Agar photo nazar nahi aa rahi, toh niche click karein:**")
-            st.write(f"[Direct Photo Link]({image_url})")
-            
-            st.success("Done! Nayi image check karein.")
+            st.success("Mubarak ho! Yeh wala server block nahi hota.")
     else:
         st.warning("Pehle kuch likho!")
