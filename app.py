@@ -1,25 +1,22 @@
 import streamlit as st
+import random
 
-st.set_page_config(page_title="Free AI Generator", page_icon="🖼️")
-st.title("🖼️ My Final Working AI Maker")
+st.set_page_config(page_title="My Working AI", page_icon="🎨")
+st.title("🎨 My Final Working AI Maker")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic city in space")
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A cool gaming logo")
 
 if st.button("Banao!"):
     if prompt:
-        with st.spinner("AI photo bana raha hai..."):
-            # Hum ab Google aur HuggingFace ka mix logic use karenge
-            # Ye link format bilkul alag hai aur asani se block nahi hota
-            clean_prompt = prompt.replace(" ", "+")
+        with st.spinner("AI Nayi Photo bana raha hai..."):
+            # Har baar naya number (seed) generate hoga taake purani pic na aaye
+            seed = random.randint(1, 99999)
             
-            # Alternative Server: Heroku/Cloudflare based free generator
-            image_url = f"https://loremflickr.com/1024/1024/{clean_prompt}"
+            # Ye naya stable link hai jo block nahi hota
+            image_url = f"https://pollinations.ai/p/{prompt.replace(' ', '%20')}?width=1024&height=1024&seed={seed}&nologo=true"
             
-            # Image dikhane ka sabse safe tareeqa
+            # Image dikhana
             st.image(image_url, caption=f"Result for: {prompt}", use_container_width=True)
-            
-            st.write("---")
-            st.success("Mubarak ho! Agar ye photo nazar aa rahi hai toh ye fast server hai.")
-            st.write(f"Link: {image_url}")
+            st.success("Mubarak ho! Nayi image tayyar hai.")
     else:
         st.warning("Pehle kuch likho!")
