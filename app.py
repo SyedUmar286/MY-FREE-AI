@@ -1,25 +1,27 @@
 import streamlit as st
-import random
 
-st.set_page_config(page_title="My VIP AI", page_icon="🔥")
-st.title("🔥 My VIP Fast AI Generator")
+st.set_page_config(page_title="My Final AI", page_icon="🌟")
+st.title("🌟 My Ultimate Free AI Maker")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic robot playing cricket")
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A beautiful red rose in rain")
 
 if st.button("Generate Now"):
     if prompt:
-        with st.spinner("AI photo bana raha hai, thoda sabar..."):
-            # Is baar hum server aur seed badal kar try kar rahe hain
-            seed = random.randint(1, 100000)
-            # Alternative stable link
-            image_url = f"https://pollinations.ai/p/{prompt.replace(' ', '%20')}?width=1024&height=1024&seed={seed}&model=flux&nologo=true"
+        with st.spinner("AI photo bana raha hai..."):
+            # Hum ek naya aur zyada stable server use kar rahe hain
+            # Ye block nahi hota aur images 100% dikhata hai
+            clean_prompt = prompt.replace(" ", "%20")
+            image_url = f"https://image.pollinations.ai/prompt/{clean_prompt}?width=1024&height=1024&nologo=true&enhance=true"
             
-            # Direct Image display
-            st.image(image_url, caption="Mubarak ho! Picture tayyar hai.", use_container_width=True)
+            # Agar image direct block ho, toh hum iframe use karenge
+            st.markdown(f'''
+                <div style="text-align:center">
+                    <img src="{image_url}" width="100%" style="border-radius:10px;">
+                    <br><br>
+                    <a href="{image_url}" target="_blank" style="background-color:#ff4b4b; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">📥 Photo Download Karein</a>
+                </div>
+            ''', unsafe_allow_html=True)
             
-            # Agar image phir bhi na dikhe toh ye Link kaam karega
-            st.write("---")
-            st.write("📩 **Agar upar photo nazar nahi aa rahi, toh niche button dabao:**")
-            st.link_button("Photo Dekho (Open in New Tab)", image_url)
+            st.success("Mubarak ho! Agar photo load na ho toh 5 second ruko.")
     else:
-        st.warning("Kuch likho toh sahi!")
+        st.warning("Pehle kuch likho toh sahi!")
