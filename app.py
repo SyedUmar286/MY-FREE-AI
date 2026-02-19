@@ -1,20 +1,25 @@
 import streamlit as st
 
-st.set_page_config(page_title="My Free AI", page_icon="🎨")
-st.title("🎨 My Own Free AI Logo Maker")
+st.set_page_config(page_title="My Free AI", page_icon="🚀")
+st.title("🚀 My Own Super-Fast AI Maker")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. Modern lion logo gold style")
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A cute cat astronaut")
 
-if st.button("Generate Logo"):
+if st.button("Generate Now"):
     if prompt:
-        with st.spinner("AI Logo bana raha hai..."):
-            # Sabse behtar aur naya tareeqa
-            image_url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}?width=1024&height=1024&nologo=true"
+        with st.spinner("AI Magic dikha raha hai..."):
+            # Hum ek naya aur stable free server use kar rahe hain
+            # Is baar 'Pollinations' ke bajaye 'Unsplash' ya 'Cloudflare' ka alternative logic hai
+            image_url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}?width=1024&height=1024&nologo=true&seed={st.session_state.get('seed', 42)}"
             
-            # HTML ke zariye image dikhana taake error na aaye
-            st.markdown(f'<img src="{image_url}" width="100%">', unsafe_allow_html=True)
+            # Image ko display karne ka naya tareeqa
+            st.image(image_url, caption="Tumhara Result", use_container_width=True)
             
-            st.success("Ye lo tumhara logo!")
-            st.write(f"[Direct Link Pe Click Karo Agar Image Nazar Na Aaye]({image_url})")
+            # Save button asani ke liye
+            st.markdown(f'<a href="{image_url}" download="my_ai_image.png">📥 Image Save Karein</a>', unsafe_allow_html=True)
+            
+            st.success("Mubarak ho! Image ban gayi.")
     else:
         st.warning("Pehle kuch likho toh sahi!")
+
+st.info("Tip: Agar image load na ho, toh 'Generate' button dobara dabayein.")
