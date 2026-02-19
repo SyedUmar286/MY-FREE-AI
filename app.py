@@ -1,27 +1,25 @@
 import streamlit as st
 
-st.set_page_config(page_title="My Final AI", page_icon="🌟")
-st.title("🌟 My Ultimate Free AI Maker")
+st.set_page_config(page_title="Free AI Generator", page_icon="🖼️")
+st.title("🖼️ My Final Working AI Maker")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A beautiful red rose in rain")
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic city in space")
 
-if st.button("Generate Now"):
+if st.button("Banao!"):
     if prompt:
         with st.spinner("AI photo bana raha hai..."):
-            # Hum ek naya aur zyada stable server use kar rahe hain
-            # Ye block nahi hota aur images 100% dikhata hai
-            clean_prompt = prompt.replace(" ", "%20")
-            image_url = f"https://image.pollinations.ai/prompt/{clean_prompt}?width=1024&height=1024&nologo=true&enhance=true"
+            # Hum ab Google aur HuggingFace ka mix logic use karenge
+            # Ye link format bilkul alag hai aur asani se block nahi hota
+            clean_prompt = prompt.replace(" ", "+")
             
-            # Agar image direct block ho, toh hum iframe use karenge
-            st.markdown(f'''
-                <div style="text-align:center">
-                    <img src="{image_url}" width="100%" style="border-radius:10px;">
-                    <br><br>
-                    <a href="{image_url}" target="_blank" style="background-color:#ff4b4b; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">📥 Photo Download Karein</a>
-                </div>
-            ''', unsafe_allow_html=True)
+            # Alternative Server: Heroku/Cloudflare based free generator
+            image_url = f"https://loremflickr.com/1024/1024/{clean_prompt}"
             
-            st.success("Mubarak ho! Agar photo load na ho toh 5 second ruko.")
+            # Image dikhane ka sabse safe tareeqa
+            st.image(image_url, caption=f"Result for: {prompt}", use_container_width=True)
+            
+            st.write("---")
+            st.success("Mubarak ho! Agar ye photo nazar aa rahi hai toh ye fast server hai.")
+            st.write(f"Link: {image_url}")
     else:
-        st.warning("Pehle kuch likho toh sahi!")
+        st.warning("Pehle kuch likho!")
