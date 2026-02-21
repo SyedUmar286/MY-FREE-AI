@@ -1,23 +1,27 @@
 import streamlit as st
+import random
 
-st.set_page_config(page_title="Working AI", page_icon="✅")
-st.title("✅ My 100% Working AI Maker")
+st.set_page_config(page_title="Pro AI Maker", page_icon="🎨")
+st.title("🎨 My Professional AI Image Maker")
 
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A cool red car")
+# User se input lena
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic city, high detail")
 
-if st.button("Banao!"):
+if st.button("Generate Image"):
     if prompt:
-        with st.spinner("AI photo dhoond raha hai..."):
-            # Is baar hum image search aur AI generation ka mix use karenge
-            # Ye link format bilkul alag hai aur asani se block nahi hota
-            search_url = f"https://api.dicebear.com/7.x/identicon/svg?seed={prompt.replace(' ', '')}"
-            image_url = f"https://loremflickr.com/800/600/{prompt.replace(' ', ',')}"
+        with st.spinner("AI Graphics bana raha hai..."):
+            # Random seed taake har baar bilkul nayi pic aaye
+            seed = random.randint(1, 999999)
             
-            # Direct Image loading via HTML (taake block na ho)
-            st.markdown(f'<img src="{image_url}" width="100%" style="border-radius:10px;">', unsafe_allow_html=True)
+            # Hum image.pollinations.ai ka naya stable endpoint use karenge
+            # Ismein humne 'nologo=true' aur 'model=flux' add kiya hai behtar results ke liye
+            image_url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}?seed={seed}&width=1024&height=1024&nologo=true&model=flux"
             
-            st.write("---")
-            st.success("Mubarak ho! Agar photo load na ho toh 5 second ruko.")
-            st.write(f"Direct Link: {image_url}")
+            # Image dikhane ka sabse behtar tareeqa
+            st.image(image_url, caption=f"AI Result: {prompt}", use_container_width=True)
+            
+            # Download link
+            st.write(f"🔗 [Direct Image Link]({image_url})")
+            st.success("Tayyar hai!")
     else:
-        st.warning("Pehle kuch likho!")
+        st.warning("Kuch likho toh sahi!")
