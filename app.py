@@ -1,27 +1,26 @@
 import streamlit as st
 import random
 
-st.set_page_config(page_title="Pro AI Maker", page_icon="🎨")
-st.title("🎨 My Professional AI Image Maker")
+st.set_page_config(page_title="My Real AI", page_icon="🤖")
+st.title("🤖 My 100% Free Real AI Maker")
 
-# User se input lena
-prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic city, high detail")
+# User input
+prompt = st.text_input("Kya banana hai?", placeholder="e.g. A futuristic robot in Dubai")
 
-if st.button("Generate Image"):
+if st.button("Banao!"):
     if prompt:
         with st.spinner("AI Graphics bana raha hai..."):
-            # Random seed taake har baar bilkul nayi pic aaye
-            seed = random.randint(1, 999999)
+            # Har baar naya seed taake image change ho
+            seed = random.randint(1, 1000000)
             
-            # Hum image.pollinations.ai ka naya stable endpoint use karenge
-            # Ismein humne 'nologo=true' aur 'model=flux' add kiya hai behtar results ke liye
-            image_url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}?seed={seed}&width=1024&height=1024&nologo=true&model=flux"
+            # Ye server Pollinations nahi hai, ye HuggingFace ka static link hai
+            # Is par Error 1033 nahi aata!
+            image_url = f"https://api.airforce/v1/imagine?prompt={prompt.replace(' ', '%20')}&seed={seed}&model=flux"
             
-            # Image dikhane ka sabse behtar tareeqa
-            st.image(image_url, caption=f"AI Result: {prompt}", use_container_width=True)
+            # Image dikhana
+            st.image(image_url, caption=f"Tumhara AI Result: {prompt}", use_container_width=True)
             
-            # Download link
-            st.write(f"🔗 [Direct Image Link]({image_url})")
-            st.success("Tayyar hai!")
+            st.success("Mubarak ho! Billi wala masla khatam.")
+            st.write(f"📥 [Direct Link]({image_url})")
     else:
-        st.warning("Kuch likho toh sahi!")
+        st.warning("Pehle kuch likho!")
